@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validador de llamadas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card mt-5">
+            <div class="card-header text-center">
+              <h1>Registro de llamadas</h1>
+            </div>
+            <div class="card-body">
+              <p>
+              <strong>Instrucciones:</strong>
+              <ul>
+                <li>Selecciona un archivo Excel (.xlsx, .xls) para subir.</li>
+                <li>El archivo debe tener el formato correcto, según los requisitos descritos en la documentación.</li>
+                <li>Pulsa 'Subir' para validar el archivo.</li>
+                <li>Los errores, si existen, se mostrarán a continuación
+                </li>
+              </ul>
+            </p>
+              {% with messages = get_flashed_messages() %} {% if messages %}
+              <div class="alert alert-danger">
+                <ul>
+                  {% for message in messages %}
+                  <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              {% endif %} {% endwith %}
+
+              <form
+                action="/upload"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="form-group">
+                  <input
+                    type="file"
+                    name="file"
+                    accept=".xlsx,.xls"
+                    class="form-control"
+                  />
+                </div>
+                <div class="d-grid gap-1 mb-1 form-group">
+                  <input
+                    type="submit"
+                    value="Subir"
+                    class="btn btn-primary mt-3"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
