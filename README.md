@@ -47,3 +47,7 @@ Descargar
 pip install python-dotenv
 pip install mysql-connector-python
 ```
+
+Actualizar las librerias de requeriments
+pip freeze > requirements.txt
+

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash
 import pandas as pd
-from prueba import get_ivr_data
+from Database import get_ivr_data
 
 app = Flask(__name__)
 app.secret_key = "mysecretkey"
@@ -51,10 +51,13 @@ def index():
 @app.route("/upload", methods=["POST"])
 def upload():
     try:
+        
+        #Lectura de archivo
         file = request.files["file"]
         df = pd.read_excel(file)
         errores = []
 
+        #Validaciones de info
         for i, row in df.iterrows():
             if not validar_formato_fecha(str(row["fecha"])):
                 errores.append((i, "fecha", row["fecha"]))
@@ -71,7 +74,7 @@ def upload():
             for error in errores:
                 flash(
                     (
-                        "danger",
+                        "Error en:",
                         f"Fila: {error[0]+2}, campo: {error[1]}, valor: {error[2]}",
                     )
                 )
