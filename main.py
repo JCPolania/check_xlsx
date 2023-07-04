@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash
 import pandas as pd
+from prueba import get_ivr_data
 
 app = Flask(__name__)
 app.secret_key = "mysecretkey"
@@ -38,38 +39,8 @@ def validar_telefono(telefono):
 
 
 def validar_operador(operador):
-    valid_operators = [
-        "PyA",
-        "CDC_2",
-        "PyA_2",
-        "DIGITAL",
-        "PISCINA",
-        "AYS_BB7",
-        "QNT_BB5",
-        "QNT_JUD",
-        "PAZ_SALVO",
-        "QNT_RBK_1",
-        "QNT_RBK_2",
-        "QNT_RBK_3",
-        "QNT_RBK_4",
-        "CX_BB5_JUD",
-        "CDC_DIGITAL",
-        "Masssolution",
-        "NEXTDATA_BB7",
-        "QNT_RECAUDO_3",
-        "PISCINA_COMITE",
-        "STUDIO_ABOGADO",
-        "QNT_RECAUDO_1_2",
-        "NEXTDATA_BB5_JUD",
-        "MANTENIMIENTO-QNT",
-        "OPERACIONES_INTERNO",
-        "DIGITAL_MONTOS_BAJOS",
-        "MANTENIMIENTO-ESP-QNT",
-        "MANTENIMIENTO_DIGITAL",
-        "MANTENIMIENTO_TDC_PyS",
-        "MANTENIMIENTO_REVISION",
-        "MANTENIMIENTO_TDC_OPERACIONES",
-    ]
+    valid_operators = get_ivr_data()
+    return operador in valid_operators
 
 
 @app.route("/")
