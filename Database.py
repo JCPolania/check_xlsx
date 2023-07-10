@@ -19,7 +19,7 @@ def create_connection():
             # print("Conexión exitosa a la base de datos")
             return connection
     except Exception as e:
-        # print("Errror en la conexión a la base de datos.", e)
+        print("Error en la conexión a la base de datos.", e)
         return None
 
 

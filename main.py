@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request, flash
 import pandas as pd
-from Database import get_ivr_data
+from werkzeug.utils import secure_filename
+from database import get_ivr_data
+from sftp import create_connection_sftp
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 app = Flask(__name__)
-app.secret_key = "mysecretkey"
+# app.config["UPLOAD_FOLDER"] = "static/"
+app.secret_key = os.getenv('C_SECRECT')
 
 
 def validar_formato_fecha(fecha):
@@ -33,6 +39,13 @@ def validar_resultado_maquina(resultado):
     ]
     return resultado in valid_results
 
+def validar_tipo_call(call):
+    valid_call = [
+        "REG",
+        "out_pre"
+    ]
+    return call in valid_call
+
 
 def validar_telefono(telefono):
     return len(str(telefono)) <= 10
@@ -48,6 +61,9 @@ def index():
     return render_template("index.html")
 
 
+
+
+
 @app.route("/upload", methods=["POST"])
 def upload():
     try:
@@ -57,6 +73,11 @@ def upload():
         df = pd.read_excel(file)
         errores = []
 
+        def save_file0(documents):
+                print(documents)
+
+
+                
         #Validaciones de info
         for i, row in df.iterrows():
             if not validar_formato_fecha(str(row["fecha"])):
@@ -69,6 +90,8 @@ def upload():
                 errores.append((i, "telefono", row["telefono"]))
             if not validar_operador(row["operado_por"]):
                 errores.append((i, "operado_por", row["operado_por"]))
+            if not validar_tipo_call(row["tipo_call"]):
+                errores.append((i, "tipo_call", row["tipo_call"]))
 
         if errores:
             for error in errores:
@@ -80,6 +103,12 @@ def upload():
                 )
         else:
             flash(("success", "Todos los datos son correctos."))
+            save_file0()
+            
+
+
+            
+            
 
     except Exception as e:
         flash(f"Error: {str(e)}")
