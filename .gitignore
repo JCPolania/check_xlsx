@@ -6,3 +6,4 @@ env
 
 #key sftp
 pem.pem
+sftp.py

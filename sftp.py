@@ -11,16 +11,16 @@ host = os.getenv("SF_HOST")
 user = os.getenv("SF_USER")
 password = os.getenv("SF_PASSWORD")
 key_password= os.getenv("SF_SECURITY_KEY")
+# rute = os.getenv("SF_RUTE")
 
 def create_connection_sftp():
     try: 
         with pysftp.Connection(host=host, username=user, private_key='./pem.pem', private_key_pass=password, cnopts = cnopts) as sftp:
             with sftp.cd("/home/validadorpr/Pruebas"):
-                # sftp.put("file")
+                sftp.put()    
                 print("Conexión a la Sftp con exito")
 
     except Exception as e:
         print("Error en la conexión a la sftp.", e)
-    
 
-
+#metodo sftp para que guarde archivos
