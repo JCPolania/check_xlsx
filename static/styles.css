@@ -1,0 +1,118 @@
+/* Estilo del fondo y del cuerpo */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(#141e30, #243b55);
+}
+
+/* Estilo del cuadro de login */
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+/* Estilo del botón de Submit */
+.login-box button[type="submit"] {
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid #03e9f4;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-transform: uppercase;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-box button[type="submit"]:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #00d9ff, #30ffec);
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.login-box button[type="submit"]:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+
+.login-box .credit {
+  color: #03e9f4;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}

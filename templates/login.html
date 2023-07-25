@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-box">
+        <h2>Iniciar Sesión</h2>
+        <form action="{{ url_for('login') }}" method="post">
+            <div class="user-box">
+                <input type="text" name="correo" required>
+                <label>Correo eléctronico</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="contrasena" required>
+                <label>Contraseña</label>
+            </div>
+            <button type="submit" class="neon-button">Ingresar</button>
+            <p class="credit">created with ❤️ by IT NR</p>
+        </form>
+    </div>
+</body>
+</html>

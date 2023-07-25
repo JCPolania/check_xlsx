@@ -28,6 +28,7 @@ def read_ivr_table(connection):
     try:
         cursor = connection.cursor()
         cursor.execute("SELECT DISTINCT operador FROM ivr_2")
+        print("correcto")
         rows = cursor.fetchall()
         strings = [row[0] for row in rows]
         return strings

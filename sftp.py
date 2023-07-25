@@ -11,7 +11,6 @@ host = os.getenv("SF_HOST")
 user = os.getenv("SF_USER")
 password = os.getenv("SF_PASSWORD")
 key_password= os.getenv("SF_SECURITY_KEY")
-# rute = os.getenv("SF_RUTE")
 
 def create_connection_sftp():
     try: 
@@ -22,5 +21,3 @@ def create_connection_sftp():
 
     except Exception as e:
         print("Error en la conexión a la sftp.", e)
-
-#metodo sftp para que guarde archivos

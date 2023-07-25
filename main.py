@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
 import pandas as pd
 # from werkzeug.utils import secure_filename
 from database import get_ivr_data
@@ -58,12 +58,48 @@ def validar_operador(operador):
     return operador in valid_operators
 
 
-@app.route("/")
+host = os.getenv('LB_HOST')
+user = os.getenv('LB_USER')
+password = os.getenv('LB_PASSWORD')
+database = os.getenv('LB_DATABASE')
+
+
+def validar_credenciales(correo, contrasena):
+    try:
+        
+        connection = mysql.connector.connect(host=host, user=user, password=password, database=database)
+
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM credenciales WHERE user = %s AND password = %s"
+        cursor.execute(query, (correo, contrasena))
+        result = cursor.fetchone()
+        cursor.close()
+        connection.close()
+
+        if result:
+            return True
+        else:
+            return False
+
+    except Exception as e:
+        print("Error al validar las credenciales:", e)
+        return False
+
+@app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template('login.html')
 
 
+@app.route('/', methods=['POST'])
+def login():
+    correo = request.form['correo']
+    contrasena = request.form['contrasena']
 
+    if validar_credenciales(correo, contrasena):
+        return render_template('index.html')
+    else:
+        return "Credenciales incorrectas"
 
 
 @app.route("/upload", methods=["POST"])
@@ -98,7 +134,7 @@ def upload():
                     )
                 )
         else:
-            flash(("success", "Todos los datos son correctos."))
+            flash("success", "Todos los datos son correctos.")
 
             load_dotenv()
             host = os.getenv('LB_HOST')
