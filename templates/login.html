@@ -9,7 +9,7 @@
         <h2>Iniciar Sesión</h2>
         <form action="{{ url_for('login') }}" method="post">
             <div class="user-box">
-                <input type="text" name="correo" required>
+                <input type="text" name="correo" required="" autocomplete="off">
                 <label>Correo eléctronico</label>
             </div>
             <div class="user-box">
@@ -17,7 +17,7 @@
                 <label>Contraseña</label>
             </div>
             <button type="submit" class="neon-button">Ingresar</button>
-            <p class="credit">created with ❤️ by IT NR</p>
+            <p class="credit">Made with ❤️ in IT NR</p>
         </form>
     </div>
 </body>
