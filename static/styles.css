@@ -1,4 +1,4 @@
-/* Estilo del fondo y del cuerpo */
+
 html, body {
   height: 100%;
   margin: 0;
@@ -7,7 +7,7 @@ html, body {
   background: linear-gradient(#141e30, #243b55);
 }
 
-/* Estilo del cuadro de login */
+
 .login-box {
   position: absolute;
   top: 50%;
@@ -62,7 +62,7 @@ html, body {
   font-size: 12px;
 }
 
-/* Estilo del botón de Submit */
+
 .login-box button[type="submit"] {
   cursor: pointer;
   background: transparent;

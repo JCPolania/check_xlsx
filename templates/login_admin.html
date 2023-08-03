@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inicio de Sesión Admin</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-box">
+        <h2>Inicio de Sesión Admin</h2>
+        <form action="/admin" method="post">
+            <div class="user-box">
+                <input type="text" name="correo" required>
+                <label>Correo electrónico</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="contrasena" required>
+                <label>Contraseña</label>
+            </div>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+</body>
+</html>

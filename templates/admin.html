@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles_admin.css') }}">
+</head>
+<body>
+    <div class="admin-box">
+        <h2>Agregar Usuarios</h2>
+        <form action="{{ url_for('add_user') }}" method="post">
+            <div class="user-box">
+                <input type="text" name="username" required>
+                <label>Correo eléctronico</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="password" required>
+                <label>Contraseña</label>
+            </div>
+            <button type="submit">Agregar</button>
+        </form>
+        <p class="credit">created with ❤️ by IT NR</p>
+    </div>
+</body>
+</html>
