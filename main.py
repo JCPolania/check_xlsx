@@ -190,47 +190,25 @@ def upload():
         else:
             flash("Success, Todos los datos son correctos.")
 
-            load_dotenv()
+            import sqlalchemy
             host = os.getenv('LB_HOST')
-            user = os.getenv('LB_USER')
+            username = os.getenv('LB_USER')
             password = os.getenv('LB_PASSWORD')
             database = os.getenv('LB_DATABASE')
+            port = os.getenv('LB_PORT')
 
-            def create_connection():
+            def load_data_ivr():
                 try:
-                    connection = mysql.connector.connect(
-                        host=host,
-                        user=user,
-                        password=password,
-                        database=database
-                    )
-                    if connection.is_connected():
-                        flash("Conexión a la base de datos exitosa")
-                        return connection
-                except Exception as e:
-                    flash("Error en la conexión a la base de datos.", e)
-                    return None
+                    url = f'''mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database}'''
 
-            def read_load_table(connection):
-                try:
-                    cursor = connection.cursor()
-                    df = pd.read_excel(file)                    
-                    for index, fila in df.iterrows():
-                        sql_insertar = f"""
-                        INSERT INTO valip (tipo_call, id_campana, nombre_cliente, apellido_cliente, identificacion, resultado_maquina, telefono, fecha, operado_por)
-                        VALUES ('{fila[0]}', '{fila[1]}', '{fila[2]}', '{fila[3]}', '{fila[4]}', '{fila[5]}', '{fila[6]}', '{fila[7]}', '{fila[8]}')
-                        """
-                        cursor.execute(sql_insertar)    
-                    connection.commit()
-                    cursor.close()
-                    flash("Cargue de datos a la tabla exitoso")
+                    engine = sqlalchemy.create_engine(url.format(url))
+
+                    df.to_sql('valip', engine, if_exists='append', index=False)
+                    flash("Se cargo correctamente a la base de datos")
                 except Exception as e:
-                    flash("Error en el cargue a la base de datos.", e)
+                    flash("Error en el cargue a la base de datos", e)
             
-            conexion = create_connection()
-            if conexion:
-                read_load_table(conexion)
-                conexion.close()
+            load_data_ivr()
     except Exception as e:
         flash(f"Error: {str(e)}")
 
